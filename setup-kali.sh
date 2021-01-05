@@ -96,8 +96,8 @@ chmod 4755 /opt/BloodHound-linux-x64/chrome-sandbox
 echo 'alias bloodhound=/opt/BloodHound-linux-x64/BloodHound --no-sandbox' >> /home/$user/.zshrc
 echo "${GREEN}Goto http://localhost:7474/ in a browser and login with neo4j:neo4j and change the password"
 echo "Aliases added:"
-echo "\t'bloodhound' to start the GUI$"
+echo "\t'bloodhound' to start the GUI"
 echo "\t'cme' to start the crackmapexec docker container"
 echo "\t'tools' to start the tools/exfil http server"
 echo "\t'smb' to start smbshare 'tools' for ~/tools directory"
-echo "Start a new terminal or source ~/.zshrc to load new env variables and aliases${NC}"
+echo "Start a new terminal or 'source ~/.zshrc' to load new env variables and aliases${NC}"
