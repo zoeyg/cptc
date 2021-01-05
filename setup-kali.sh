@@ -23,7 +23,7 @@ apt-get install -y nodejs
 
 # yarn
 echo "${GREEN}Installing yarn${NC}"
-apt-get install yarn
+apt-get install -y yarn
 
 # exfil server and some tools
 echo "${GREEN}Installing dependencies/tools for exfil/tools server${NC}"
