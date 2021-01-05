@@ -3,6 +3,7 @@
 # git clone https://github.com/zoeyg/cptc.git ~/tools 
 # chmod +x ~/tools/setup-kali.sh
 # sudo ~/tools/setup-kali.sh $(whoami)
+# . ~/.zshrc
 
 user="$1"
 
@@ -34,6 +35,10 @@ git clone https://github.com/carlospolop/privilege-escalation-awesome-scripts-su
 ln -s privilege-escalation-awesome-scripts-suite/linPEAS/linpeas.sh linpeas.sh
 ln -s privilege-escalation-awesome-scripts-suite/winPEAS/winPEASbat/winPEAS.bat winpeas.bat
 ln -s privilege-escalation-awesome-scripts-suite/winPEAS/winPEASexe/winPEAS/bin/x64/Release/winPEAS.exe winpeas.exe
+git clone https://github.com/PowerShellMafia/PowerSploit.git
+ln -s PowerSploit/Recon/PowerView.ps1 powerview.ps1
+zip win-recon.zip PowerSploit/Recon/*
+zip win-privesc.zip PowerSploit/Privesc/*
 
 # docker
 echo "${GREEN}Installing docker${NC}"
@@ -49,13 +54,6 @@ apt-get install -y python3-impacket
 echo "${GREEN}Installing visual studio code${NC}"
 curl -L 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64' --output /tmp/vscode.deb
 dpkg -i /tmp/vscode.deb
-
-# backup any current .zshrc, install oh-my-zsh
-#echo "${GREEN}Installing oh-my-zsh${NC}"
-#su - $user -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended'
-#sed -i 's/robbyrussell/bira/' /home/$user/.zshrc
-#sed -i 's/(git)/(docker git)/' /home/$user/.zshrc
-#su - $user -c 'git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /home/kali/.oh-my-zsh/plugins/zsh-syntax-highlighting'
 
 # go
 echo "${GREEN}Installing golang${NC}"
@@ -91,8 +89,3 @@ chmod 4755 /opt/BloodHound-linux-x64/chrome-sandbox
 echo 'alias bloodhound=/opt/BloodHound-linux-x64/BloodHound --no-sandbox' >> /home/$user/.zshrc
 echo "${GREEN}Goto http://localhost:7474/ in a browser and login with neo4j:neo4j and change the password${NC}"
 echo "${GREEN}Use 'bloodhound' to start the GUI${NC}"
-
-# We're done, run the new shell
-#echo "${GREEN}Changing shell to zsh and then running it${NC}"
-#su - $user -c 'chsh -s $(which zsh)'
-#su - $user -c 'exec zsh -l'
