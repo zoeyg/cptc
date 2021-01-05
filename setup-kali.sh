@@ -1,18 +1,38 @@
 #!/bin/sh
 
-# run with 
-# sudo ./this-script.sh $(whoami)
+# git clone https://github.com/zoeyg/cptc.git ~/tools 
+# sudo ./setup-kali.sh $(whoami)
 
 user="$1"
 
 GREEN='\033[1;32m'
 NC='\033[0m'
-# for bloodhound prereqs
+# for bloodhound prereqs and yarn
 echo "${GREEN}Setting up keys and repos${NC}"
 echo "deb http://httpredir.debian.org/debian stretch-backports main" | tee -a /etc/apt/sources.list.d/stretch-backports.list
 wget -O - https://debian.neo4j.com/neotechnology.gpg.key | apt-key add -
 echo 'deb https://debian.neo4j.com stable 4.0' > /etc/apt/sources.list.d/neo4j.list
-apt-get update
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+# nodejs install script, runs apt-get update
+echo "${GREEN}Installing node.js${NC}"
+curl -sL https://deb.nodesource.com/setup_lts.x | bash -
+apt-get install -y nodejs
+
+# yarn
+echo "${GREEN}Installing yarn${NC}"
+apt-get install yarn
+
+# exfil server and some tools
+echo "${GREEN}Installing dependencies/tools for exfil/tools server${NC}"
+cd /home/$user/tools
+yarn
+wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy64
+git clone https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite
+ln -s privilege-escalation-awesome-scripts-suite/linPEAS/linpeas.sh linpeas.sh
+ln -s privilege-escalation-awesome-scripts-suite/winPEAS/winPEASbat/winPEAS.bat winpeas.bat
+ln -s privilege-escalation-awesome-scripts-suite/winPEAS/winPEASexe/winPEAS/bin/x64/Release/winPEAS.exe winpeas.exe
 
 # docker
 echo "${GREEN}Installing docker${NC}"
