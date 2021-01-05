@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # git clone https://github.com/zoeyg/cptc.git ~/tools 
-# sudo ./setup-kali.sh $(whoami)
+# chmod +x ~/tools/setup-kali.sh
+# sudo ~/tools/setup-kali.sh $(whoami)
 
 user="$1"
 
