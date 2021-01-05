@@ -38,8 +38,8 @@ git clone https://github.com/PowerShellMafia/PowerSploit.git
 ln -s PowerSploit/Recon/PowerView.ps1 powerview.ps1
 zip win-recon.zip PowerSploit/Recon/*
 zip win-privesc.zip PowerSploit/Privesc/*
-echo "alias tools=node ~/tools/exfil-tools-server.sh 8080 ~/tools" >> /home/$user/.zshrc
-echo "alias smb=sudo impacket-smbserver tools /home/$user/tools" >> /home/$user/.zshrc
+echo "alias tools='node ~/tools/exfil-tools-server.sh 8080 ~/tools'" >> /home/$user/.zshrc
+echo "alias smb='sudo impacket-smbserver tools /home/$user/tools'" >> /home/$user/.zshrc
 
 # docker
 echo "${G1}Installing docker${NC}"
@@ -50,7 +50,7 @@ usermod -aG docker $user
 # crackmapexec via docker
 echo "${G1}Installing crackmapexec${NC}"
 docker pull byt3bl33d3r/crackmapexec
-echo "alias cme=docker run -it --entrypoint=/bin/sh --name crackmapexec -v ~/.cme:/root/.cme byt3bl33d3r/crackmapexec" >> /home/$user/.zshrc
+echo "alias cme='docker run -it --entrypoint=/bin/sh --name crackmapexec -v ~/.cme:/root/.cme byt3bl33d3r/crackmapexec'" >> /home/$user/.zshrc
 
 # impacket
 echo "${G1}Installing impacket - use impacket-[cmd]${NC}"
@@ -103,7 +103,7 @@ echo "${G1}Installing Bloodhound GUI${NC}"
 curl -L "https://github.com/BloodHoundAD/BloodHound/releases/download/4.0.1/BloodHound-linux-x64.zip" --output /tmp/bloodhound.zip
 unzip /tmp/bloodhound.zip -d /opt
 chmod 4755 /opt/BloodHound-linux-x64/chrome-sandbox
-echo 'alias bloodhound=/opt/BloodHound-linux-x64/BloodHound --no-sandbox' >> /home/$user/.zshrc
+echo "alias bloodhound='/opt/BloodHound-linux-x64/BloodHound --no-sandbox'" >> /home/$user/.zshrc
 echo "${G1}Goto http://localhost:7474/ in a browser and login with neo4j:neo4j and change the password"
 echo "Aliases added:"
 echo "${G0}\t${CY}bloodhound${G0} to start the GUI"
