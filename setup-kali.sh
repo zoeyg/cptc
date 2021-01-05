@@ -46,6 +46,11 @@ apt install -y docker.io
 systemctl enable docker --now
 usermod -aG docker $user
 
+# crackmapexec via docker
+echo "${GREEN}Installing crackmapexec${NC}"
+docker pull byt3bl33d3r/crackmapexec
+echo "alias cme=docker run -it --entrypoint=/bin/sh --name crackmapexec -v ~/.cme:/root/.cme byt3bl33d3r/crackmapexec" >> /home/$user/.zshrc
+
 # impacket
 echo "${GREEN}Installing impacket - use impacket-[cmd]${NC}"
 apt-get install -y python3-impacket
