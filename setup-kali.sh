@@ -77,6 +77,10 @@ chmod +x /usr/bin/kerbrute
 echo "${G1}Installing gobuster${NC}"
 apt-get install -y gobuster
 
+# evil-winrm
+echo "${G1}Installing evil-winrm${NC}"
+gem install evil-winrm
+
 # autorecon and prerequisites
 echo "${G1}Installing AutoRecon prerequisites${NC}"
 apt install -y seclists curl enum4linux gobuster nbtscan nikto nmap onesixtyone oscanner smbclient smbmap smtp-user-enum snmp sslscan sipvicious tnscmd10g whatweb wkhtmltopdf
