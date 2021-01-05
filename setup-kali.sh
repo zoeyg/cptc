@@ -1,16 +1,15 @@
 #!/bin/sh
 
-# git clone https://github.com/zoeyg/cptc.git ~/tools 
-# chmod +x ~/tools/setup-kali.sh
 # sudo ~/tools/setup-kali.sh $(whoami)
-# . ~/.zshrc
 
 user="$1"
 
-GREEN='\033[1;32m'
+G1='\033[1;32m'
+G0='\033[0;32m'
 NC='\033[0m'
+CY='\033[1;36m'
 # for bloodhound prereqs and yarn
-echo "${GREEN}Setting up keys and repos${NC}"
+echo "${G1}Setting up keys and repos${NC}"
 echo "deb http://httpredir.debian.org/debian stretch-backports main" | tee -a /etc/apt/sources.list.d/stretch-backports.list
 wget -O - https://debian.neo4j.com/neotechnology.gpg.key | apt-key add -
 echo 'deb https://debian.neo4j.com stable 4.0' > /etc/apt/sources.list.d/neo4j.list
@@ -18,16 +17,16 @@ curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
 # nodejs install script, runs apt-get update
-echo "${GREEN}Installing node.js${NC}"
+echo "${G1}Installing node.js${NC}"
 curl -sL https://deb.nodesource.com/setup_lts.x | bash -
 apt-get install -y nodejs
 
 # yarn
-echo "${GREEN}Installing yarn${NC}"
+echo "${G1}Installing yarn${NC}"
 apt-get install -y yarn
 
 # exfil server and some tools
-echo "${GREEN}Installing dependencies/tools for exfil/tools server${NC}"
+echo "${G1}Installing dependencies/tools for exfil/tools server${NC}"
 cd /home/$user/tools
 yarn
 wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy64
@@ -43,61 +42,61 @@ echo "alias tools=node ~/tools/exfil-tools-server.sh 8080 ~/tools" >> /home/$use
 echo "alias smb=sudo impacket-smbserver tools /home/$user/tools" >> /home/$user/.zshrc
 
 # docker
-echo "${GREEN}Installing docker${NC}"
+echo "${G1}Installing docker${NC}"
 apt install -y docker.io
 systemctl enable docker --now
 usermod -aG docker $user
 
 # crackmapexec via docker
-echo "${GREEN}Installing crackmapexec${NC}"
+echo "${G1}Installing crackmapexec${NC}"
 docker pull byt3bl33d3r/crackmapexec
 echo "alias cme=docker run -it --entrypoint=/bin/sh --name crackmapexec -v ~/.cme:/root/.cme byt3bl33d3r/crackmapexec" >> /home/$user/.zshrc
 
 # impacket
-echo "${GREEN}Installing impacket - use impacket-[cmd]${NC}"
+echo "${G1}Installing impacket - use impacket-[cmd]${NC}"
 apt-get install -y python3-impacket
 
 # vscode
-echo "${GREEN}Installing visual studio code${NC}"
+echo "${G1}Installing visual studio code${NC}"
 curl -L 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64' --output /tmp/vscode.deb
 dpkg -i /tmp/vscode.deb
 
 # go
-echo "${GREEN}Installing golang${NC}"
+echo "${G1}Installing golang${NC}"
 apt-get install -y golang
 echo 'export GOROOT=/usr/lib/go' >> /home/$user/.zshrc
 echo 'export GOPATH=$HOME/go' >> /home/$user/.zshrc
 echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> /home/$user/.zshrc
 
 # kerbrute
-echo "${GREEN}Installing Kerbrute${NC}"
+echo "${G1}Installing Kerbrute${NC}"
 curl -L https://github.com/ropnop/kerbrute/releases/download/v1.0.3/kerbrute_linux_amd64 --output /usr/bin/kerbrute
 chmod +x /usr/bin/kerbrute
 
 # gobuster
-echo "${GREEN}Installing gobuster${NC}"
+echo "${G1}Installing gobuster${NC}"
 apt-get install -y gobuster
 
 # autorecon and prerequisites
-echo "${GREEN}Installing AutoRecon prerequisites${NC}"
+echo "${G1}Installing AutoRecon prerequisites${NC}"
 apt install -y seclists curl enum4linux gobuster nbtscan nikto nmap onesixtyone oscanner smbclient smbmap smtp-user-enum snmp sslscan sipvicious tnscmd10g whatweb wkhtmltopdf
-echo "${GREEN}Installing AutoRecon${NC}"
+echo "${G1}Installing AutoRecon${NC}"
 pip install git+https://github.com/Tib3rius/AutoRecon.git
 
 # bloodhound
-echo "${GREEN}Installing Bloodhound Prerequisites${NC}"
+echo "${G1}Installing Bloodhound Prerequisites${NC}"
 apt-get install -y apt-transport-https
 apt-get install -y neo4j
 systemctl start neo4j
-echo "${GREEN}Installing Bloodhound GUI${NC}"
+echo "${G1}Installing Bloodhound GUI${NC}"
 curl -L "https://github.com/BloodHoundAD/BloodHound/releases/download/4.0.1/BloodHound-linux-x64.zip" --output /tmp/bloodhound.zip
 unzip /tmp/bloodhound.zip -d /opt
 chmod 4755 /opt/BloodHound-linux-x64/chrome-sandbox
 echo 'alias bloodhound=/opt/BloodHound-linux-x64/BloodHound --no-sandbox' >> /home/$user/.zshrc
-echo "${GREEN}Goto http://localhost:7474/ in a browser and login with neo4j:neo4j and change the password"
+echo "${G1}Goto http://localhost:7474/ in a browser and login with neo4j:neo4j and change the password"
 echo "Aliases added:"
-echo "\t'bloodhound' to start the GUI"
-echo "\t'cme' to start the crackmapexec docker container"
-echo "\t'tools' to start the tools/exfil http server"
-echo "\t'smb' to start smbshare 'tools' for ~/tools directory"
-echo "Start a new terminal or 'source ~/.zshrc' to load new env variables and aliases${NC}"
+echo "${G0}\t${CY}bloodhound${G0} to start the GUI"
+echo "${G0}\t${CY}cme${G0} to start the crackmapexec docker container"
+echo "${G0}\t${CY}tools${G0} to start the tools/exfil http server"
+echo "${G0}\t${CY}smb${G0} to start smbshare 'tools' for ~/tools directory"
+echo "${G1}Start a new terminal or 'source ~/.zshrc' to load new env variables and aliases${NC}"
