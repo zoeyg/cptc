@@ -87,6 +87,13 @@ curl https://i.jpillora.com/chisel! | bash
 wget https://github.com/jpillora/chisel/releases/download/v1.7.3/chisel_1.7.3_windows_amd64.gz
 gunzip chisel_1.7.3_windows_amd64.gz
 mv chisel_1.7.3_windows_amd64 chisel.exe
+ln -s /usr/local/bin/chisel chisel
+
+# static binaries
+echo "${G1}Installing various static binaries${NC}"
+git clone https://github.com/andrew-d/static-binaries.git
+ln -s static-binaries/binaries/linux/x86_64 linux-bin
+ln -s static-binaries/binaries/windows/x64 win-bin
 
 # autorecon and prerequisites
 echo "${G1}Installing AutoRecon prerequisites${NC}"
