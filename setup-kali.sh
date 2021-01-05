@@ -97,7 +97,7 @@ ln -s static-binaries/binaries/windows/x64 win-bin
 
 # autorecon and prerequisites
 echo "${G1}Installing AutoRecon prerequisites${NC}"
-apt install -y seclists curl enum4linux gobuster nbtscan nikto nmap onesixtyone oscanner smbclient smbmap smtp-user-enum snmp sslscan sipvicious tnscmd10g whatweb wkhtmltopdf
+apt install -y seclists curl enum4linux gobuster nbtscan nikto nmap onesixtyone oscanner smbclient smbmap smtp-user-enum snmp sslscan sipvicious tnscmd10g whatweb wkhtmltopdf python3-pip
 echo "${G1}Installing AutoRecon${NC}"
 pip install git+https://github.com/Tib3rius/AutoRecon.git
 
