@@ -109,7 +109,6 @@ systemctl start neo4j
 echo "${G1}Installing Bloodhound GUI${NC}"
 curl -L "https://github.com/BloodHoundAD/BloodHound/releases/download/4.0.1/BloodHound-linux-x64.zip" --output /tmp/bloodhound.zip
 unzip /tmp/bloodhound.zip -d /opt
-chmod 4755 /opt/BloodHound-linux-x64/chrome-sandbox
 echo "alias bloodhound='/opt/BloodHound-linux-x64/BloodHound --no-sandbox'" >> /home/$user/.zshrc
 echo "${G1}Goto http://localhost:7474/ in a browser and login with neo4j:neo4j and change the password"
 echo "Aliases added:"
