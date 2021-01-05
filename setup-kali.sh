@@ -81,6 +81,13 @@ apt-get install -y gobuster
 echo "${G1}Installing evil-winrm${NC}"
 gem install evil-winrm
 
+# chisel
+echo "${G1}Installing chisel${NC}"
+curl https://i.jpillora.com/chisel! | bash
+wget https://github.com/jpillora/chisel/releases/download/v1.7.3/chisel_1.7.3_windows_amd64.gz
+gunzip chisel_1.7.3_windows_amd64.gz
+mv chisel_1.7.3_windows_amd64 chisel.exe
+
 # autorecon and prerequisites
 echo "${G1}Installing AutoRecon prerequisites${NC}"
 apt install -y seclists curl enum4linux gobuster nbtscan nikto nmap onesixtyone oscanner smbclient smbmap smtp-user-enum snmp sslscan sipvicious tnscmd10g whatweb wkhtmltopdf
