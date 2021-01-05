@@ -1,5 +1,5 @@
 # Run this
 
 ```
-git clone https://github.com/zoeyg/cptc.git ~/tools; chmod +x ~/tools/setup-kali.sh; sudo ~/tools/setup-kali.sh $(whoami)
+curl -sL https://raw.githubusercontent.com/zoeyg/cptc/main/install.sh | bash -
 ```
